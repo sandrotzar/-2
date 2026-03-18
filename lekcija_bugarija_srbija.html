@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Подем на Бугарија и Србија</title>
+<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Uncial+Antiqua&family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0a05;
+    --bg2: #1a1005;
+    --gold: #d4a843;
+    --gold-light: #f0cc80;
+    --gold-dark: #8a6820;
+    --red: #9b2020;
+    --red-light: #c43030;
+    --blue: #1a3a6a;
+    --blue-light: #2a5aaa;
+    --parchment: #f2e4c4;
+    --parchment-dark: #d9c89a;
+    --text-dark: #1a0f00;
+    --text-mid: #4a3010;
+    --shadow: rgba(0,0,0,0.7);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Crimson Pro', Georgia, serif;
+    color: var(--parchment);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    position: relative;
+    background: linear-gradient(180deg, #050200 0%, #1a0f03 50%, #0f0a05 100%);
+    padding: 50px 20px 40px;
+    text-align: center;
+    border-bottom: 2px solid var(--gold-dark);
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(212,168,67,0.12) 0%, transparent 70%),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(212,168,67,0.02) 60px, rgba(212,168,67,0.02) 61px);
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--red);
+    color: #f2e4c4;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    padding: 5px 18px;
+    border-radius: 1px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    position: relative;
+  }
+  .header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    color: var(--gold);
+    font-weight: 900;
+    line-height: 1.2;
+    text-shadow: 0 0 40px rgba(212,168,67,0.3), 0 2px 4px rgba(0,0,0,0.8);
+    position: relative;
+    letter-spacing: 1px;
+  }
+  .header-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 16px 0;
+    color: var(--gold-dark);
+    font-size: 1rem;
+    letter-spacing: 8px;
+  }
+  .header-divider::before,
+  .header-divider::after {
+    content: '';
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark));
+  }
+  .header-divider::after { background: linear-gradient(270deg, transparent, var(--gold-dark)); }
+  .header-sub {
+    color: var(--parchment-dark);
+    font-style: italic;
+    font-size: 1.05rem;
+    position: relative;
+  }
+
+  /* ===== TABS ===== */
+  .tabs-wrapper {
+    background: #0a0703;
+    border-bottom: 2px solid var(--gold-dark);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--parchment-dark);
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    padding: 14px 20px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.25s;
+    white-space: nowrap;
+    position: relative;
+  }
+  .tab-btn:hover { color: var(--gold); background: rgba(212,168,67,0.05); }
+  .tab-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+    background: rgba(212,168,67,0.08);
+  }
+  .tab-icon { margin-right: 6px; }
+
+  /* ===== CONTENT AREA ===== */
+  .content-area {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 16px 60px;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: linear-gradient(135deg, rgba(242,228,196,0.97) 0%, rgba(217,200,154,0.97) 100%);
+    border-radius: 3px;
+    margin-bottom: 22px;
+    border: 1px solid rgba(212,168,67,0.4);
+    box-shadow: 0 6px 30px var(--shadow);
+    overflow: hidden;
+    animation: fadeUp 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.12s; }
+  .card:nth-child(3) { animation-delay: 0.19s; }
+  .card:nth-child(4) { animation-delay: 0.26s; }
+  .card:nth-child(5) { animation-delay: 0.33s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-header {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .card-header.bulgaria { background: linear-gradient(135deg, #1a0e0e, #2d1515); }
+  .card-header.serbia   { background: linear-gradient(135deg, #0e1a0e, #152d15); }
+  .card-header.both     { background: linear-gradient(135deg, #0e0e1a, #15152d); }
+  .card-header.gold     { background: linear-gradient(135deg, #1a1505, #2d2010); }
+
+  .card-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .card-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    color: var(--gold);
+  }
+  .card-header.bulgaria h2 { color: #e8a0a0; }
+  .card-header.serbia h2   { color: #a0c8a0; }
+
+  .card-body { padding: 20px; }
+  .card-body p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+  }
+  .card-body p:last-child { margin-bottom: 0; }
+
+  b.ruler { color: var(--red); font-weight: 700; }
+  b.place  { color: #5a3800; font-weight: 700; }
+  b.year   {
+    background: var(--text-dark);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    padding: 1px 7px;
+    border-radius: 2px;
+    font-weight: 400;
+  }
+  b.event  { color: var(--blue); font-weight: 700; }
+
+  /* ===== TWO KINGDOMS SPLIT ===== */
+  .split-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+  .kingdom-card {
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid;
+    animation: fadeUp 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .kingdom-card.bg { border-color: rgba(200,80,80,0.4); animation-delay: 0.05s; }
+  .kingdom-card.sr { border-color: rgba(80,160,80,0.4); animation-delay: 0.12s; }
+  .kingdom-kh {
+    padding: 12px 16px;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .kingdom-card.bg .kingdom-kh { background: #2d1515; color: #e8a0a0; }
+  .kingdom-card.sr .kingdom-kh { background: #152d15; color: #a0c8a0; }
+  .kingdom-body {
+    background: linear-gradient(135deg, rgba(242,228,196,0.97), rgba(217,200,154,0.97));
+    padding: 14px;
+  }
+  .ruler-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(90,56,0,0.15);
+    font-size: 0.92rem;
+    color: var(--text-dark);
+    line-height: 1.5;
+  }
+  .ruler-item:last-child { border-bottom: none; }
+  .ruler-emoji { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+
+  /* ===== TIMELINE ===== */
+  .timeline { position: relative; padding: 4px 0; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--gold-dark));
+  }
+  .tl-item {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 22px;
+    position: relative;
+    animation: fadeUp 0.5s ease forwards;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .tl-item:nth-child(1) { animation-delay: 0.05s; }
+  .tl-item:nth-child(2) { animation-delay: 0.1s; }
+  .tl-item:nth-child(3) { animation-delay: 0.15s; }
+  .tl-item:nth-child(4) { animation-delay: 0.2s; }
+  .tl-item:nth-child(5) { animation-delay: 0.25s; }
+  .tl-item:nth-child(6) { animation-delay: 0.3s; }
+  .tl-item:nth-child(7) { animation-delay: 0.35s; }
+  .tl-item:nth-child(8) { animation-delay: 0.4s; }
+
+  .tl-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+    margin-left: 13px;
+    position: relative; z-index: 1;
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px currentColor;
+  }
+  .tl-dot.bg { background: #c84040; color: #c84040; }
+  .tl-dot.sr { background: #40a040; color: #40a040; }
+  .tl-dot.both { background: var(--gold); color: var(--gold); }
+
+  .tl-content {
+    flex: 1;
+    background: linear-gradient(135deg, rgba(242,228,196,0.96), rgba(217,200,154,0.96));
+    border-radius: 3px;
+    padding: 12px 16px;
+    border: 1px solid rgba(212,168,67,0.25);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+  }
+  .tl-year {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .tl-dot.bg ~ .tl-content .tl-year { color: var(--red); }
+  .tl-dot.sr ~ .tl-content .tl-year { color: #2a6a2a; }
+  .tl-dot.both ~ .tl-content .tl-year { color: var(--gold-dark); }
+  .tl-text { font-size: 0.98rem; color: var(--text-dark); line-height: 1.6; }
+
+  .tl-legend {
+    display: flex; gap: 18px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .tl-leg-item {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(242,228,196,0.08);
+    border: 1px solid rgba(212,168,67,0.2);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 0.85rem;
+    color: var(--parchment-dark);
+  }
+  .leg-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+  .leg-dot.bg { background: #c84040; }
+  .leg-dot.sr { background: #40a040; }
+  .leg-dot.both { background: var(--gold); }
+
+  /* ===== FIGURES GRID ===== */
+  .figures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 14px;
+  }
+  .fig-card {
+    background: linear-gradient(135deg, rgba(242,228,196,0.97), rgba(217,200,154,0.97));
+    border-radius: 3px;
+    border: 1px solid rgba(212,168,67,0.3);
+    overflow: hidden;
+    box-shadow: 0 4px 16px var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+    animation: fadeUp 0.5s ease forwards;
+    opacity: 0; transform: translateY(12px);
+  }
+  .fig-card:nth-child(1){animation-delay:0.05s}
+  .fig-card:nth-child(2){animation-delay:0.1s}
+  .fig-card:nth-child(3){animation-delay:0.15s}
+  .fig-card:nth-child(4){animation-delay:0.2s}
+  .fig-card:nth-child(5){animation-delay:0.25s}
+  .fig-card:nth-child(6){animation-delay:0.3s}
+  .fig-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px var(--shadow); }
+  .fig-top {
+    padding: 14px;
+    text-align: center;
+  }
+  .fig-top.bg { background: linear-gradient(135deg, #2d1515, #3a1a1a); }
+  .fig-top.sr { background: linear-gradient(135deg, #152d15, #1a3a1a); }
+  .fig-emoji { font-size: 2rem; display: block; margin-bottom: 6px; }
+  .fig-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+  }
+  .fig-top.bg .fig-name { color: #f0b0b0; }
+  .fig-top.sr .fig-name { color: #b0e0b0; }
+  .fig-body {
+    padding: 12px;
+    font-size: 0.88rem;
+    color: var(--text-dark);
+    line-height: 1.55;
+  }
+  .fig-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-family: 'Cinzel', serif;
+    padding: 2px 8px;
+    border-radius: 1px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .fig-tag.bg { background: #c84040; color: #fff; }
+  .fig-tag.sr { background: #2a6a2a; color: #fff; }
+
+  /* ===== TERMS ===== */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 14px;
+  }
+  .term-card {
+    background: linear-gradient(135deg, rgba(242,228,196,0.97), rgba(217,200,154,0.97));
+    border-radius: 3px;
+    border-left: 4px solid var(--gold);
+    padding: 14px 16px;
+    box-shadow: 0 3px 12px var(--shadow);
+    animation: fadeUp 0.5s ease forwards;
+    opacity: 0; transform: translateY(10px);
+  }
+  .term-card:nth-child(1){animation-delay:0.05s}
+  .term-card:nth-child(2){animation-delay:0.1s}
+  .term-card:nth-child(3){animation-delay:0.15s}
+  .term-card:nth-child(4){animation-delay:0.2s}
+  .term-card:nth-child(5){animation-delay:0.25s}
+  .term-card:nth-child(6){animation-delay:0.3s}
+  .term-card:nth-child(7){animation-delay:0.35s}
+  .term-word {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .term-def { font-size: 0.9rem; color: var(--text-mid); line-height: 1.55; }
+
+  /* ===== QUIZ ===== */
+  .quiz-score-bar {
+    background: rgba(242,228,196,0.08);
+    border: 1px solid rgba(212,168,67,0.3);
+    border-radius: 3px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .score-label { font-family: 'Cinzel', serif; color: var(--parchment-dark); font-size: 0.9rem; }
+  .score-val {
+    font-family: 'Cinzel', serif;
+    background: var(--gold-dark);
+    color: var(--gold-light);
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 4px 18px;
+    border-radius: 3px;
+    border: 1px solid var(--gold);
+  }
+
+  .quiz-q {
+    background: linear-gradient(135deg, rgba(242,228,196,0.97), rgba(217,200,154,0.97));
+    border-radius: 3px;
+    border: 1px solid rgba(212,168,67,0.3);
+    margin-bottom: 16px;
+    overflow: hidden;
+    animation: fadeUp 0.4s ease forwards;
+    opacity: 0; transform: translateY(10px);
+    box-shadow: 0 4px 16px var(--shadow);
+  }
+  .quiz-q:nth-child(2){animation-delay:0.05s}
+  .quiz-q:nth-child(3){animation-delay:0.1s}
+  .quiz-q:nth-child(4){animation-delay:0.15s}
+  .quiz-q:nth-child(5){animation-delay:0.2s}
+  .quiz-q:nth-child(6){animation-delay:0.25s}
+  .quiz-q:nth-child(7){animation-delay:0.3s}
+
+  .quiz-qh {
+    padding: 7px 14px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: var(--parchment-dark);
+  }
+  .quiz-qh.bg { background: #2d1515; }
+  .quiz-qh.sr { background: #152d15; }
+  .quiz-qh.both { background: #1a1505; }
+
+  .quiz-qt {
+    padding: 14px 16px 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.5;
+  }
+  .quiz-opts {
+    padding: 0 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .quiz-opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 9px 13px;
+    border-radius: 2px;
+    border: 1.5px solid rgba(90,56,0,0.2);
+    background: rgba(255,255,255,0.4);
+    transition: all 0.2s;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+  }
+  .quiz-opt:hover { background: rgba(212,168,67,0.2); border-color: var(--gold-dark); }
+  .quiz-opt.correct { background: rgba(40,100,40,0.15); border-color: #4a8a4a; color: #1a4a1a; }
+  .quiz-opt.wrong   { background: rgba(139,26,26,0.12); border-color: var(--red); color: var(--red); }
+  .opt-letter {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--text-dark);
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .quiz-fb {
+    padding: 6px 16px 12px;
+    font-size: 0.9rem;
+    font-style: italic;
+    display: none;
+    color: var(--text-dark);
+  }
+  .quiz-fb.show { display: block; }
+  .quiz-fb.cfb { color: #1a5a1a; }
+  .quiz-fb.wfb { color: var(--red); }
+
+  /* ===== CHECKLIST ===== */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(212,168,67,0.15);
+    font-size: 1rem;
+    color: var(--parchment);
+    cursor: pointer;
+    line-height: 1.6;
+    transition: color 0.2s;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li:hover { color: var(--gold-light); }
+  .chk-box {
+    width: 22px; height: 22px;
+    border: 2px solid var(--gold-dark);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+    color: transparent;
+    transition: all 0.2s;
+  }
+  .checklist li.done .chk-box { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+  .checklist li.done > span { text-decoration: line-through; opacity: 0.5; }
+
+  /* COMPARE TABLE */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: linear-gradient(135deg, rgba(242,228,196,0.97), rgba(217,200,154,0.97));
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px var(--shadow);
+    font-size: 0.95rem;
+    animation: fadeUp 0.5s ease 0.05s forwards;
+    opacity: 0; transform: translateY(10px);
+  }
+  .compare-table th {
+    padding: 12px 16px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+    text-align: left;
+  }
+  .compare-table th:first-child { background: #1a1505; color: var(--gold); }
+  .compare-table th.bg-th { background: #2d1515; color: #f0b0b0; }
+  .compare-table th.sr-th { background: #152d15; color: #b0e0b0; }
+  .compare-table td {
+    padding: 11px 16px;
+    color: var(--text-dark);
+    border-top: 1px solid rgba(90,56,0,0.12);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .compare-table td:first-child { font-weight: 600; color: var(--text-mid); background: rgba(212,168,67,0.08); }
+  .compare-table tr:hover td { background: rgba(212,168,67,0.08); }
+  .compare-table tr:hover td:first-child { background: rgba(212,168,67,0.15); }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: rgba(212,168,67,0.35);
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    border-top: 1px solid rgba(212,168,67,0.1);
+  }
+  .footer span { color: var(--gold-dark); }
+
+  @media (max-width: 600px) {
+    .split-header { grid-template-columns: 1fr; }
+    .figures-grid { grid-template-columns: 1fr 1fr; }
+    .terms-grid { grid-template-columns: 1fr; }
+    .tab-btn { font-size: 0.7rem; padding: 12px 12px; }
+    .compare-table { font-size: 0.85rem; }
+    .compare-table th, .compare-table td { padding: 9px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-badge">📚 История · VIII одделение</div>
+  <h1>Подем на Бугарија<br>и Србија</h1>
+  <div class="header-divider">✦ ✦ ✦</div>
+  <div class="header-sub">Развиен среден век · XII – XIV век · Балканот</div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrapper">
+  <button class="tab-btn active" onclick="showTab('pregled')"><span class="tab-icon">📜</span>Преглед</button>
+  <button class="tab-btn" onclick="showTab('timeline')"><span class="tab-icon">⏳</span>Временска линија</button>
+  <button class="tab-btn" onclick="showTab('lichnosti')"><span class="tab-icon">👑</span>Личности</button>
+  <button class="tab-btn" onclick="showTab('sporedba')"><span class="tab-icon">⚖️</span>Споредба</button>
+  <button class="tab-btn" onclick="showTab('poimi')"><span class="tab-icon">📖</span>Поими</button>
+  <button class="tab-btn" onclick="showTab('test')"><span class="tab-icon">🎯</span>Тест</button>
+  <button class="tab-btn" onclick="showTab('checklist')"><span class="tab-icon">✅</span>Научив</button>
+</div>
+
+<div class="content-area">
+
+  <!-- ===== ПРЕГЛЕД ===== -->
+  <div class="tab-panel active" id="tab-pregled">
+
+    <div class="split-header">
+      <div class="kingdom-card bg">
+        <div class="kingdom-kh">🐉 Второто Бугарско Царство</div>
+        <div class="kingdom-body">
+          <div class="ruler-item"><span class="ruler-emoji">⚔️</span><span><b>Петар и Асен</b> — предводници на востанието против Византија (1187)</span></div>
+          <div class="ruler-item"><span class="ruler-emoji">👑</span><span><b>Калојан</b> — ја зацврстил државата, добил круна од папата</span></div>
+          <div class="ruler-item"><span class="ruler-emoji">🌟</span><span><b>Иван II Асен</b> — врвот на моќта, победа кај Клокотница (1230)</span></div>
+        </div>
+      </div>
+      <div class="kingdom-card sr">
+        <div class="kingdom-kh">🦅 Средновековна Србија</div>
+        <div class="kingdom-body">
+          <div class="ruler-item"><span class="ruler-emoji">⚔️</span><span><b>Стефан Немања</b> — создал независна српска држава, центар Рас</span></div>
+          <div class="ruler-item"><span class="ruler-emoji">👑</span><span><b>Стефан Првовенчани</b> — крунисан за крал (1217), основана Српска Crkva</span></div>
+          <div class="ruler-item"><span class="ruler-emoji">🌟</span><span><b>Стефан Душан</b> — крунисан за цар во Скопје (1346), врвот на моќта</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header bulgaria">
+        <span class="card-icon">🐉</span>
+        <h2>Второто Бугарско Царство</h2>
+      </div>
+      <div class="card-body">
+        <p>Во втората половина на XII век, Византија ослабела. Во северна Бугарија, браќата <b class="ruler">Петар и Асен</b> кренале востание против Византија. Им се придружиле Куманите и во <b class="year">1187 г.</b> Византија морала да склучи мир. Така настанало <b class="event">Второто Бугарско Царство</b> со престолнина во <b class="place">Трново</b>.</p>
+        <p>По убиството на Петар и Асен, на престолот дошол <b class="ruler">Калојан</b>. Ги проширил границите кон Македонија и Тракија и добил кралска круна од папата, но сам се сметал за <b class="event">цар</b>. Загинал во <b class="year">1207 г.</b> при обид да го заземе Солун.</p>
+        <p>Врвот на бугарската моќ бил за време на <b class="ruler">Иван II Асен</b>. Водел успешни војни против Латинското Царство, Српското Кралство и Епирското Деспотство. Победата кај <b class="place">Клокотница</b> (<b class="year">1230 г.</b>) ги уништила плановите на Теодор Ангел Комнин. По смртта на Иван II (1241), Бугарија ослабела — прво под притисок на <b class="event">Монголците</b>, а потоа и пред osmanлиските освојувања.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header serbia">
+        <span class="card-icon">🦅</span>
+        <h2>Осамостојување на српската држава</h2>
+      </div>
+      <div class="card-body">
+        <p>Во втората половина на XII век, <b class="ruler">Стефан Немања</b> ја отфрлил византиската власт и создал <b class="event">независна српска држава</b>. Ја проширил кон запад до Јадранско Море, кон исток до Ниш. Главно средиште — тврдината <b class="place">Рас</b>.</p>
+        <p>По него, <b class="ruler">Стефан Првовенчани</b> ја засилил државата. Во <b class="year">1217 г.</b> бил крунисан за <b class="event">крал</b> со круна од папата — Србија станала <b class="event">кралство</b>. Основана е и <b class="event">самостојна српска православна црква</b>, а прв архиепископ бил <b class="ruler">Свети Сава</b>.</p>
+        <p><b class="ruler">Стефан Урош II Милутин</b> ги освоил делови на Македонија, вклучувајќи го <b class="place">Скопје</b>, и ја проширил државата до реката Дунав.</p>
+        <p>Врвот бил за време на <b class="ruler">Стефан Душан</b> — освоил Македонија, Тесалија, Епир и Албанија. Во <b class="year">1346 г.</b> бил крунисан за <b class="event">цар</b> во <b class="place">Скопје</b>, а Српската Crkva станала <b class="event">патријаршија</b>. По неговата ненадејна смрт, државата почнала да се распаѓа.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== ВРЕМЕНСКА ЛИНИЈА ===== -->
+  <div class="tab-panel" id="tab-timeline">
+    <div class="tl-legend">
+      <div class="tl-leg-item"><div class="leg-dot bg"></div>Бугарија</div>
+      <div class="tl-leg-item"><div class="leg-dot sr"></div>Србија</div>
+      <div class="tl-leg-item"><div class="leg-dot both"></div>Заеднички настан</div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot bg"></div>
+        <div class="tl-content">
+          <div class="tl-year">Втора половина на XII век</div>
+          <div class="tl-text">Браќата <b class="ruler">Петар и Асен</b> кренале востание против Византија во северна Бугарија, на просторот меѓу Дунав и Стара Планина.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot bg"></div>
+        <div class="tl-content">
+          <div class="tl-year">1187 г.</div>
+          <div class="tl-text">Византија склучила мир и се повлекла. Настанало <b class="event">Второто Бугарско Царство</b> со престолнина во <b class="place">Трново</b>.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot sr"></div>
+        <div class="tl-content">
+          <div class="tl-year">Втора половина на XII век</div>
+          <div class="tl-text"><b class="ruler">Стефан Немања</b> ја отфрлил византиската власт и создал <b class="event">независна српска држава</b> со центар во тврдината <b class="place">Рас</b>.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot sr"></div>
+        <div class="tl-content">
+          <div class="tl-year">1217 г.</div>
+          <div class="tl-text"><b class="ruler">Стефан Првовенчани</b> крунисан за <b class="event">крал</b> со папска круна. Србија станала кралство. Основана самостојна Српска Crkva, прв архиепископ — <b class="ruler">Свети Сава</b>.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot both"></div>
+        <div class="tl-content">
+          <div class="tl-year">1230 г. — Битката кај Клокотница</div>
+          <div class="tl-text"><b class="ruler">Иван II Асен</b> (Бугарија) го поразил и заробил <b class="ruler">Теодор Ангел Комнин</b> (Епир). Голема победа за Бугарија — врвот на нејзината моќ.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot bg"></div>
+        <div class="tl-content">
+          <div class="tl-year">1241 г.</div>
+          <div class="tl-text">Смртта на <b class="ruler">Иван II Асен</b>. Бугарија почнала да слабее. Нови владетели не успеале да го сопрат нападот на <b class="event">Монголците</b>.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot sr"></div>
+        <div class="tl-content">
+          <div class="tl-year">Втора половина на XIII век</div>
+          <div class="tl-text"><b class="ruler">Стефан Урош II Милутин</b> ги освоил делови на Македонија, вклучувајќи го <b class="place">Скопје</b>, и ја проширил државата до Дунав.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot sr"></div>
+        <div class="tl-content">
+          <div class="tl-year">1346 г.</div>
+          <div class="tl-text"><b class="ruler">Стефан Душан</b> крунисан за <b class="event">цар</b> во <b class="place">Скопје</b>. Српската Crkva станала патријаршија. Врвот на српската моќ.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ЛИЧНОСТИ ===== -->
+  <div class="tab-panel" id="tab-lichnosti">
+    <div class="figures-grid">
+      <div class="fig-card">
+        <div class="fig-top bg">
+          <span class="fig-emoji">⚔️</span>
+          <div class="fig-name">Петар и Асен</div>
+        </div>
+        <div class="fig-body">
+          <span class="fig-tag bg">Бугарија</span>
+          <p>Водачи на востанието против Византија (1187). Го основале Второто Бугарско Царство.</p>
+        </div>
+      </div>
+      <div class="fig-card">
+        <div class="fig-top bg">
+          <span class="fig-emoji">👑</span>
+          <div class="fig-name">Калојан</div>
+        </div>
+        <div class="fig-body">
+          <span class="fig-tag bg">Бугарија</span>
+          <p>Ги проширил границите кон Македонија и Тракија. Добил круна од папата. Загинал во 1207 г.</p>
+        </div>
+      </div>
+      <div class="fig-card">
+        <div class="fig-top bg">
+          <span class="fig-emoji">🌟</span>
+          <div class="fig-name">Иван II Асен</div>
+        </div>
+        <div class="fig-body">
+          <span class="fig-tag bg">Бугарија</span>
+          <p>Врвот на бугарската моќ. Победа кај Клокотница (1230). Водел успешни војни на сите страни.</p>
+        </div>
+      </div>
+      <div class="fig-card">
+        <div class="fig-top sr">
+          <span class="fig-emoji">🏰</span>
+          <div class="fig-name">Стефан Немања</div>
+        </div>
+        <div class="fig-body">
+          <span class="fig-tag sr">Србија</span>
+          <p>Основач на независна Србија. Центар — тврдината Рас. Основач на династијата Немањиќи.</p>
+        </div>
+      </div>
+      <div class="fig-card">
+        <div class="fig-top sr">
+          <span class="fig-emoji">✝️</span>
+          <div class="fig-name">Стефан Првовенчани</div>
+        </div>
+        <div class="fig-body">
+          <span class="fig-tag sr">Србија</span>
+          <p>Крунисан за крал во 1217 г. Србија станала кралство. Во негово время основана Српска Crkva.</p>
+        </div>
+      </div>
+      <div class="fig-card">
+        <div class="fig-top sr">
+          <span class="fig-emoji">⛪</span>
+          <div class="fig-name">Свети Сава</div>
+        </div>
+        <div class="fig-body">
+          <span class="fig-tag sr">Србија</span>
+          <p>Брат на Стефан Првовенчани. Прв архиепископ на самостојната Српска православна Crkva.</p>
+        </div>
+      </div>
+      <div class="fig-card">
+        <div class="fig-top sr">
+          <span class="fig-emoji">⚔️</span>
+          <div class="fig-name">Стефан Урош II Милутин</div>
+        </div>
+        <div class="fig-body">
+          <span class="fig-tag sr">Србија</span>
+          <p>Ги освоил делови на Македонија вклучувајќи Скопје. Државата ја проширил до реката Дунав.</p>
+        </div>
+      </div>
+      <div class="fig-card">
+        <div class="fig-top sr">
+          <span class="fig-emoji">🌟</span>
+          <div class="fig-name">Стефан Душан</div>
+        </div>
+        <div class="fig-body">
+          <span class="fig-tag sr">Србија</span>
+          <p>Крунисан за цар во Скопје (1346). Освоил Македонија, Тесалија, Епир, Албанија. Врвот на Srbija.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== СПОРЕДБА ===== -->
+  <div class="tab-panel" id="tab-sporedba">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="bg-th">🐉 Бугарија</th>
+          <th class="sr-th">🦅 Србија</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Настанување</td>
+          <td>Востание на Петар и Асен против Византија (1187)</td>
+          <td>Стефан Немања ја отфрлил Византија (XII в.)</td>
+        </tr>
+        <tr>
+          <td>Престолнина</td>
+          <td>Трново</td>
+          <td>Рас → Скопје (за времето на Душан)</td>
+        </tr>
+        <tr>
+          <td>Прв крал/цар</td>
+          <td>Калојан добил круна од папата</td>
+          <td>Стефан Првовенчани — крал во 1217 г.</td>
+        </tr>
+        <tr>
+          <td>Врвот на моќта</td>
+          <td>Иван II Асен — трисетте год. на XIII в.</td>
+          <td>Стефан Душан — крунисан за цар 1346 г.</td>
+        </tr>
+        <tr>
+          <td>Клучна битка</td>
+          <td>Клокотница (1230) — победа на Иван II Асен</td>
+          <td>Нема една одлучувачка — освојувачки походи</td>
+        </tr>
+        <tr>
+          <td>Crkvata</td>
+          <td>Бугарска православна Crkva (под Рим кратко)</td>
+          <td>Самостојна Srpska Crkva — архиепископија (Свети Сава)</td>
+        </tr>
+        <tr>
+          <td>Амбиции</td>
+          <td>Освојување на Константинопол (неуспешно)</td>
+          <td>Освојување на Константинопол (нема морнарица)</td>
+        </tr>
+        <tr>
+          <td>Опаѓање</td>
+          <td>Монголци + Osmanлии (кон крај на XIII в.)</td>
+          <td>Распаѓање по смртта на Душан, Osmanлии (XIV в.)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== ПОИМИ ===== -->
+  <div class="tab-panel" id="tab-poimi">
+    <div class="terms-grid">
+      <div class="term-card">
+        <div class="term-word">Второто Бугарско Царство</div>
+        <div class="term-def">Бугарска држава основана во 1187 г. по востанието на Петар и Асен против Византија. Престолнина — Трново.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-word">Клокотница (1230)</div>
+        <div class="term-def">Пресудна битка во која Иван II Асен го поразил и заробил Теодор Ангел Комнин. Врвот на бугарската моќ.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-word">Рас</div>
+        <div class="term-def">Главна тврдина и средиште на српската држава за време на Стефан Немања. Лоцирана во регионот Рашка.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-word">Стефан Првовенчани</div>
+        <div class="term-def">Прв српски крал (1217). Со папска круна Srbija станала кралство. Во негово время основана Самостојна Crkva.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-word">Свети Сава</div>
+        <div class="term-def">Брат на Стефан Првовенчани. Прв архиепископ на самостојната Српска православна Crkva.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-word">Душанов Законик</div>
+        <div class="term-def">Збирка закони донесена за времето на Стефан Душан. Едно од најголемите достигнувања на средновековна Srbija.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-word">Монголци</div>
+        <div class="term-def">По смртта на Иван II Асен (1241) навлегле длабоко во Бугарија. Државата морала да им плаќа данок.</div>
+      </div>
+      <div class="term-card">
+        <div class="term-word">Немањиќи</div>
+        <div class="term-def">Српска кралска династија основана од Стефан Немања. Сите владетели го додавале „Стефан" пред своето лично ime.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ТЕСТ ===== -->
+  <div class="tab-panel" id="tab-test">
+    <div class="quiz-score-bar">
+      <span class="score-label">Твојот резултат:</span>
+      <span class="score-val" id="scoreVal">0 / 7</span>
+    </div>
+    <div id="quizWrap"></div>
+  </div>
+
+  <!-- ===== ЧЕКЛИСТА ===== -->
+  <div class="tab-panel" id="tab-checklist">
+    <div class="card">
+      <div class="card-header gold">
+        <span class="card-icon">✅</span>
+        <h2>Кликни на она што го научил/а</h2>
+      </div>
+      <div class="card-body">
+        <ul class="checklist" id="chkList">
+          <li onclick="toggleChk(this)"><span class="chk-box">✓</span><span>Второто Бугарско Царство го основале Петар и Асен во 1187 г. по востание против Византија.</span></li>
+          <li onclick="toggleChk(this)"><span class="chk-box">✓</span><span>Престолнина на Второто Бугарско Царство бил градот Трново.</span></li>
+          <li onclick="toggleChk(this)"><span class="chk-box">✓</span><span>Калојан го проширил царството и добил круна од папата, но сам се сметал за цар.</span></li>
+          <li onclick="toggleChk(this)"><span class="chk-box">✓</span><span>Иван II Асен ја постигнал Победата кај Клокотница во 1230 г. над Теодор Ангел Комнин.</span></li>
+          <li onclick="toggleChk(this)"><span class="chk-box">✓</span><span>Стефан Немања ја отфрлил Византија и ја создал независна српска држава со центар во Рас.</span></li>
+          <li onclick="toggleChk(this)"><span class="chk-box">✓</span><span>Стефан Првовенчани бил крунисан за крал во 1217 г. — Srbija станала кралство.</span></li>
+          <li onclick="toggleChk(this)"><span class="chk-box">✓</span><span>Свети Сава бил прв архиепископ на самостојната Српска православна Crkva.</span></li>
+          <li onclick="toggleChk(this)"><span class="chk-box">✓</span><span>Стефан Урош II Милутин ги освоил делови на Македонија, вклучувајќи Скопје.</span></li>
+          <li onclick="toggleChk(this)"><span class="chk-box">✓</span><span>Стефан Душан бил крунисан за цар во Скопје во 1346 г. — врвот на српската моќ.</span></li>
+          <li onclick="toggleChk(this)"><span class="chk-box">✓</span><span>По смртта на Душан, државата се распаднала на мали кнежевства и не можела да ги одбие Osmanлиите.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end content-area -->
+
+<div class="footer">✦ <span>История — VIII одделение</span> · Балканот и Македонија ✦</div>
+
+<script>
+// TABS
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  // Re-trigger animations
+  document.querySelectorAll('#tab-' + id + ' [style*="opacity"]').forEach(el => {
+    el.style.animation = 'none';
+    el.offsetHeight;
+    el.style.animation = '';
+  });
+}
+
+// CHECKLIST
+function toggleChk(el) { el.classList.toggle('done'); }
+
+// QUIZ DATA
+const quiz = [
+  { q: "Кои браќа го предводеле востанието против Византија во 1187 г.?",
+    opts: ["Калојан и Асен", "Петар и Асен", "Стефан и Сава", "Иван и Калојан"],
+    ans: 1, cat: "bg",
+    fb: "✅ Точно! Петар и Асен го предводеле востанието и го основале Второто Бугарско Царство." },
+  { q: "Каде се наоѓала престолнината на Второто Бугарско Царство?",
+    opts: ["Солун", "Скопје", "Трново", "Охрид"],
+    ans: 2, cat: "bg",
+    fb: "✅ Точно! Трново (денешен Велико Трново) бил главниот град." },
+  { q: "Кој бугарски цар ја постигнал победата кај Клокотница во 1230 г.?",
+    opts: ["Калојан", "Петар", "Иван II Асен", "Асен I"],
+    ans: 2, cat: "bg",
+    fb: "✅ Точно! Иван II Асен ги постигнал врвовите на бугарската моќ." },
+  { q: "Кој ја создал независната српска држава со центар во Рас?",
+    opts: ["Стефан Душан", "Свети Сава", "Стефан Урош II", "Стефан Немања"],
+    ans: 3, cat: "sr",
+    fb: "✅ Точно! Стефан Немања е основач на независна Србија и на династијата Немањиќи." },
+  { q: "Во која година Стефан Првовенчани бил крунисан за крал?",
+    opts: ["1187 г.", "1217 г.", "1230 г.", "1346 г."],
+    ans: 1, cat: "sr",
+    fb: "✅ Точно! Во 1217 г. Srbija станала кралство со папска круна." },
+  { q: "Кој бил прв архиепископ на самостојната Српска православна Crkva?",
+    opts: ["Стефан Немања", "Стефан Првовенчани", "Свети Сава", "Стефан Душан"],
+    ans: 2, cat: "sr",
+    fb: "✅ Точно! Свети Сава, брат на Стефан Првовенчани, станал прв архиепископ." },
+  { q: "Каде бил крунисан Стефан Душан за цар во 1346 г.?",
+    opts: ["Трново", "Рас", "Солун", "Скопје"],
+    ans: 3, cat: "sr",
+    fb: "✅ Точно! Во Скопје Стефан Душан бил крунисан за цар и Crkva станала патријаршија." },
+];
+
+let score = 0;
+let answered = new Array(quiz.length).fill(false);
+
+function buildQuiz() {
+  const wrap = document.getElementById('quizWrap');
+  quiz.forEach((q, qi) => {
+    const d = document.createElement('div');
+    d.className = 'quiz-q';
+    d.innerHTML = `
+      <div class="quiz-qh ${q.cat}">Прашање ${qi+1} од ${quiz.length} · ${q.cat === 'bg' ? '🐉 Бугарија' : '🦅 Srbija'}</div>
+      <div class="quiz-qt">${q.q}</div>
+      <div class="quiz-opts">
+        ${q.opts.map((o,oi)=>`
+          <div class="quiz-opt" onclick="answer(${qi},${oi})" id="qo-${qi}-${oi}">
+            <span class="opt-letter">${['А','Б','В','Г'][oi]}</span>${o}
+          </div>`).join('')}
+      </div>
+      <div class="quiz-fb" id="qfb-${qi}"></div>
+    `;
+    wrap.appendChild(d);
+  });
+}
+
+function answer(qi, oi) {
+  if (answered[qi]) return;
+  answered[qi] = true;
+  const q = quiz[qi];
+  for (let i = 0; i < q.opts.length; i++) {
+    const el = document.getElementById(`qo-${qi}-${i}`);
+    if (i === q.ans) el.classList.add('correct');
+    else if (i === oi) el.classList.add('wrong');
+  }
+  const fb = document.getElementById(`qfb-${qi}`);
+  if (oi === q.ans) {
+    score++;
+    fb.textContent = q.fb;
+    fb.className = 'quiz-fb show cfb';
+  } else {
+    fb.textContent = `❌ Неточно. Точниот одговор е: "${q.opts[q.ans]}"`;
+    fb.className = 'quiz-fb show wfb';
+  }
+  document.getElementById('scoreVal').textContent = `${score} / ${quiz.length}`;
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
